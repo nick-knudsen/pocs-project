@@ -37,21 +37,15 @@ fips = [f"50{thing['properties']['COUNTY']}" for thing in vt_counties]
 import plotly.express as px
 import plotly.figure_factory as ff
 
-colorscale = [
-    'rgb(193, 193, 193)',
-    'rgb(239,239,239)',
-    'rgb(195, 196, 222)',
-    'rgb(144,148,194)',
-    'rgb(101,104,168)',
-    'rgb(65, 53, 132)'
-]
+colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", "#9ecae1",
+    "#85bcdb", "#6baed6", "#57a0ce", "#4292c6", "#3082be", "#2171b5", "#1361a9",
+    "#08519c", "#0b4083", "#08306b"]
 
 
-values = condensed_vermont['Pop2010']
-values = [i + 1 for i in range(14)]
+values = condensed_vermont['Pop2010'].values
 fig = ff.create_choropleth(
     fips=fips, values=values, scope=['VT'],
-    binning_endpoints=[2, 4, 6, 8, 10], colorscale=colorscale,
+    binning_endpoints=sorted([int(val) for val in values]), colorscale=colorscale,
     county_outline={'color': 'rgb(255,255,255)', 'width': 0.5}, round_legend_values=True,
     legend_title='Population by County', title='Vermont'
 )
