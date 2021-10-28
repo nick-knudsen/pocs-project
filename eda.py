@@ -23,7 +23,7 @@ df = pd.read_csv('datadata.csv')
 vermont = df[df['State'] == 'Vermont']
 
 vt_counties = vermont['County'].unique()
-condensed_vermont = vermont.groupby('County').mean()
+condensed_vermont = vermont.groupby('County').sum()
 
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
@@ -43,6 +43,7 @@ colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", 
 
 
 values = condensed_vermont['Pop2010'].values
+print(sum(values))
 fig = ff.create_choropleth(
     fips=fips, values=values, scope=['VT'],
     binning_endpoints=sorted([int(val) for val in values]), colorscale=colorscale,
