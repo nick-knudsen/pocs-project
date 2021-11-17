@@ -25,9 +25,9 @@ fig = ff.create_choropleth(
 
 
 fig.add_trace(go.Scattergeo(
-            lon = [44.299460],
-            lat = [-73.184960],
-            text = ['test'],
+            lon = [44.467500],
+            lat = [-73.175630],
+            text = ['test McDonalds'],
             name = 'fast food',
             mode = 'markers',
             marker = dict(
