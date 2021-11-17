@@ -14,7 +14,7 @@ colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", 
 mean_poverty = df.groupby('County').mean()['PovertyRate']
 
 
-values = mean_poverty.round(3).values + [1]
+values = mean_poverty.round(3).values
 
 fig = ff.create_choropleth(
     fips=fips, values=values, scope=['VT'],
