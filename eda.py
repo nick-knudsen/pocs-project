@@ -33,6 +33,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 vt_counties = [thing for thing in counties['features'] if thing['properties']['STATE'] == '50']
 # county_data = vt_counties['properties']
 fips = [f"50{thing['properties']['COUNTY']}" for thing in vt_counties]
+fips.sort()
 
 
 import plotly.express as px
