@@ -6,8 +6,8 @@ import json
 def prep_vermont():
     columns = ['State', 'County', 'Urban', 'Pop2010', 'OHU2010', 'LILATracts_1And10', 'LILATracts_halfAnd10', 'HUNVFlag', 'LowIncomeTracts',
             'PovertyRate', 'MedianFamilyIncome', 'LA1and10', 'LAhalfand10', 'LA1and20', 'LATracts_half', 'LATracts1', 'LATracts10', 'LATracts20',
-            'LAPOP1_10',  'lawhitehalfshare', 'lablackhalfshare', 'laasianhalfshare', 'laaianhalfshare', 'lahisphalfshare', 'lawhite1share',
-             'lablack1share', 'laasian1share', 'laaian1share', 'lahisp1share']
+            'LAPOP1_10', 'lapophalf', 'lapophalfshare', 'lawhitehalfshare', 'lablackhalfshare', 'laasianhalfshare', 'laaianhalfshare', 'lahisphalfshare', 
+            'lapop1', 'lapop1share', 'lawhite1share', 'lablack1share', 'laasian1share', 'laaian1share', 'lahisp1share', 'lapop10', 'lapop10share']
 
     df_path = r'datadata.csv'
 
