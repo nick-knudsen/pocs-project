@@ -21,12 +21,12 @@ def gen_choropleth(values: list, title: str, legend_title: str, fips: list, colo
 
 df, counties, fips = prep_vermont()
 
-
 condensed_counties = df.groupby('County').mean()
-
 
 mean_poverty = condensed_counties['PovertyRate']
 mean_pop = condensed_counties['Pop2010']
 
 poverty_map = gen_choropleth(mean_poverty, 'Mean Poverty', 'Mean Poverty Levels', fips)
 pop_map = gen_choropleth(mean_pop, 'Mean Pop', 'Mean Population Levels', fips)
+
+poverty_map.show()
