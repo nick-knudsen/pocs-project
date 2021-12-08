@@ -14,7 +14,7 @@ def prep_state(state: str):
 
     df = pd.read_csv(df_path, usecols=columns)
 
-    df_state = df[df['State'] == state]
+    df_state = df[df['State'] == state.title()]
 
     with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
         counties = json.load(response)
