@@ -22,7 +22,7 @@ def prep_state(state: str):
     fips_df = pd.read_csv(os.path.join('data', 'fips.csv'))
     state_code = fips_df[fips_df['state'] == state.title()]['fips'].values[0]
     state_counties = [thing for thing in counties['features'] if thing['properties']['STATE'] == str(state_code)]
-    # county_data = vt_counties['properties']
     fips = [f"{state_code}{thing['properties']['COUNTY']}" for thing in state_counties]
     fips.sort()
-    # return df_state, state_counties, fips
+
+    return df_state, state_counties, fips
