@@ -1,6 +1,7 @@
 import pandas as pd
 from urllib.request import urlopen
 import json
+import os
 
 
 def prep_vermont():
@@ -9,7 +10,7 @@ def prep_vermont():
             'LAPOP1_10', 'lapophalf', 'lapophalfshare', 'lawhitehalfshare', 'lablackhalfshare', 'laasianhalfshare', 'laaianhalfshare', 'lahisphalfshare', 
             'lapop1', 'lapop1share', 'lawhite1share', 'lablack1share', 'laasian1share', 'laaian1share', 'lahisp1share', 'lapop10', 'lapop10share']
 
-    df_path = r'datadata.csv'
+    df_path = os.path.join('data', 'datadata.csv')
 
     df = pd.read_csv(df_path, usecols=columns)
 
