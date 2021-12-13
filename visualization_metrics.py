@@ -63,10 +63,7 @@ def usa():
     
 
 def main():
-    columns = ['']
-    column_dict = prep(columns)
-    visualize(column_dict)
+    usa()
 
 if __name__ == '__main__':
-    #main()
-    usa()
+    main()
