@@ -15,9 +15,13 @@ def gen_choropleth(values: list, title: str, legend_title: str, fips: list):
     
     fig = ff.create_choropleth(
         fips=fips, values=values, scope=['USA'],
-        #binning_endpoints=[],
+        #binning_endpoints=list(np.linspace(1, 12, len(colorscale) - 1)),
         #colorscale=colorscale,
-        county_outline={'color': 'rgb(255,255,255)', 'width': 0.5}, round_legend_values=True,
+        show_state_data=False,
+        show_hover=True, centroid_marker={'opacity': 0},
+        asp=2.9,
+        #county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+        round_legend_values=True,
         legend_title=legend_title, title=title
     )
 
@@ -33,7 +37,7 @@ def figures_to_html(figs, filename="dashboard.html"):
 
 
 def prep(columns: list):
-    df, counties, fips = prep_vermont()
+    df, counties, fips = prep_state('vermont')
     df_copy = df.copy(deep=True)
     df_copy = df_copy.reset_index(drop=True)
     df_copy.fillna(0)
@@ -55,15 +59,15 @@ def visualize(dict_column: dict):
     webbrowser.open_new_tab(f'file://{os.path.join(os.getcwd(), path)}')
 
 
-def usa():
-    df = pd.read_csv('data/overall_df.csv')
+def usa(feature: str):
+    df = pd.read_csv(r'data/overall_df.csv')
     column_dict = {}
-    column_dict['metric'] = gen_choropleth(df['metric'], 'Test', 'test', df['FIPS'])
+    column_dict[feature] = gen_choropleth(df[feature], 'Title', 'Caption', df['FIPS'])
     visualize(column_dict)
     
 
 def main():
-    usa()
+    usa(feature='metric')
 
 if __name__ == '__main__':
     main()
