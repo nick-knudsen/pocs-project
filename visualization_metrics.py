@@ -9,14 +9,14 @@ import webbrowser
 
 def gen_choropleth(values: list, title: str, legend_title: str, fips: list):
 
-    #colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", "#9ecae1",
-    #"#85bcdb", "#6baed6", "#57a0ce", "#4292c6", "#3082be", "#2171b5", "#1361a9",
-    #"#08519c", "#0b4083", "#08306b"]
-    
+    colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", "#9ecae1",
+    "#85bcdb", "#6baed6", "#57a0ce", "#4292c6", "#3082be", "#2171b5", "#1361a9",
+    "#08519c", "#0b4083", "#08306b"]
+
     fig = ff.create_choropleth(
         fips=fips, values=values, scope=['USA'],
-        #binning_endpoints=list(np.linspace(1, 12, len(colorscale) - 1)),
-        #colorscale=colorscale,
+        binning_endpoints=list(np.logspace(1, 12, len(colorscale) - 1)),
+        colorscale=colorscale,
         show_state_data=False,
         show_hover=True, centroid_marker={'opacity': 0},
         asp=2.9,
@@ -61,13 +61,15 @@ def visualize(dict_column: dict):
 
 def usa(feature: str):
     df = pd.read_csv(r'data/overall_df.csv')
+    print(df.columns)
+    # return
     column_dict = {}
     column_dict[feature] = gen_choropleth(df[feature], 'Title', 'Caption', df['FIPS'])
     visualize(column_dict)
     
 
 def main():
-    usa(feature='metric')
+    usa(feature='total_est')
 
 if __name__ == '__main__':
     main()
