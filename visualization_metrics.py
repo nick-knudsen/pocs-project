@@ -7,7 +7,7 @@ import os
 import webbrowser
 
 
-def gen_choropleth(values: list, title: str, legend_title: str, fips: list):
+def gen_choropleth(values: list, df, feature: str, title: str, legend_title: str, fips: list):
 
     colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", "#9ecae1",
     "#85bcdb", "#6baed6", "#57a0ce", "#4292c6", "#3082be", "#2171b5", "#1361a9",
@@ -15,12 +15,12 @@ def gen_choropleth(values: list, title: str, legend_title: str, fips: list):
 
     fig = ff.create_choropleth(
         fips=fips, values=values, scope=['USA'],
-        binning_endpoints=list(np.logspace(1, 12, len(colorscale) - 1)),
-        colorscale=colorscale,
+        binning_endpoints=list(np.linspace(df[feature].min(), df[feature].max(), 3)),
+        # colorscale=colorscale,
         show_state_data=False,
         show_hover=True, centroid_marker={'opacity': 0},
         asp=2.9,
-        #county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+        # county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
         round_legend_values=True,
         legend_title=legend_title, title=title
     )
@@ -61,15 +61,15 @@ def visualize(dict_column: dict):
 
 def usa(feature: str):
     df = pd.read_csv(r'data/overall_df.csv')
-    print(df.columns)
-    # return
+    df['new'] = (df['LAPOP05_10'] / df['Pop2010']) * 100
+    df['metric'] = np.log10(df['metric'] + 1)
     column_dict = {}
-    column_dict[feature] = gen_choropleth(df[feature], 'Title', 'Caption', df['FIPS'])
+    column_dict[feature] = gen_choropleth(df[feature], df, feature, 'Title', '', df['FIPS'])
     visualize(column_dict)
-    
+
 
 def main():
-    usa(feature='total_est')
+    usa(feature='metric')
 
 if __name__ == '__main__':
     main()
